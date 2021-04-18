@@ -97,6 +97,23 @@ class LinkedList:
         else:
             return False
 
+    def length_of_linked_list_iterative(self):
+        length = 0
+        self.curr = self.head
+        while self.curr is not None:
+            length += 1
+            self.curr = self.curr.next
+        return length
+
+    def get_count(self, crr: Node):
+        if crr is None:
+            return 0
+        else:
+            return 1 + self.get_count(crr.next)
+
+    def length_of_linked_list_recursive(self):
+        return self.get_count(self.head)
+
 
 if __name__ == '__main__':
     l = LinkedList()
@@ -113,3 +130,6 @@ if __name__ == '__main__':
     l.delete_node(-1)
     l.delete_node_by_position(1)
     l.print_linked_list()
+
+    print(l.length_of_linked_list_iterative())
+    print(l.length_of_linked_list_recursive())

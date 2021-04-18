@@ -42,7 +42,7 @@ class LinkedList:
             self.curr = self.curr.next
         self.curr.next = n
 
-    def add_node_after(self,after_node:int,data:int)->bool:
+    def add_node_after(self, after_node: int, data: int) -> bool:
         # Add after data after given node
         self.curr = self.head
         while self.curr.next:
@@ -57,13 +57,59 @@ class LinkedList:
             self.curr.next = n
             return True
 
+    def delete_node(self, data: int) -> bool:
+        # Delete given node from linked list if present
+        self.curr = self.head
+        prev = self.head
+        while self.curr:
+            if self.curr.data == data:
+                break
+            prev = self.curr
+            self.curr = self.curr.next
+        if self.curr is None:
+            return False
+        else:
+            if self.curr is prev:
+                # first node to be deleted
+                self.head = self.curr.next
+                return True
+            else:
+                prev.next = self.curr.next
+                return True
+
+    def delete_node_by_position(self, position: int) -> bool:
+        self.curr = self.head
+        prev = None
+        while position != 0:
+            if self.curr is None:
+                break
+            else:
+                prev = self.curr
+                self.curr = self.curr.next
+                position -= 1
+
+        if position == 0:
+            if self.curr is prev:
+                self.head = self.curr.next
+            else:
+                prev.next = self.curr.next
+            return True
+        else:
+            return False
+
+
 if __name__ == '__main__':
     l = LinkedList()
     l.generate_random_data(10)
     l.print_linked_list()
+
     l.add_node_at_first(-1)
-    l.print_linked_list()
     l.add_node_at_last(11)
+    l.add_node_after(9, 10)
     l.print_linked_list()
-    l.add_node_after(9,10)
+
+    l.delete_node(2)
+    l.delete_node(11)
+    l.delete_node(-1)
+    l.delete_node_by_position(1)
     l.print_linked_list()

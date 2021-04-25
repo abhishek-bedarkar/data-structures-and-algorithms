@@ -114,6 +114,56 @@ class LinkedList:
     def length_of_linked_list_recursive(self):
         return self.get_count(self.head)
 
+    def is_present(self, data: int) -> int:
+        found_count = 0
+        self.curr = self.head
+        while self.curr:
+            if self.curr.data == data:
+                found_count += 1
+            self.curr = self.curr.next
+        return found_count
+
+    def swap_node(self, src_data: int, des_data: int) -> bool:
+        # check if both node present in list and only once
+        if self.is_present(src_data) == 0 or self.is_present(src_data) > 1 or (
+                self.is_present(des_data) == 0 or self.is_present(des_data) > 1):
+            return False
+        prev_x = None
+        curr_x = None
+        self.curr = self.head
+        while self.curr is not None or self.curr.data != src_data:
+            prev_x = self.curr
+            curr_x = self.curr.next
+            self.curr = self.curr.next
+
+        prev_y = None
+        curr_y = None
+        self.curr = self.head
+        while self.curr is not None or self.curr.next != des_data:
+            prev_y = self.curr
+            curr_y = self.curr.next
+            self.curr = self.curr.next
+
+        # if x is not head of list
+        if prev_x is not None:
+            prev_x.next = curr_y
+        else:
+            self.head = curr_y
+
+        # if y is not head of list
+        if prev_y is not None:
+            prev_y.next = curr_x
+        else:
+            self.head = curr_x
+
+        # Swap next pointers
+
+        temp = curr_x.next
+        curr_x.next = curr_y.next
+        curr_y.next = temp
+
+        return True
+
 
 if __name__ == '__main__':
     l = LinkedList()

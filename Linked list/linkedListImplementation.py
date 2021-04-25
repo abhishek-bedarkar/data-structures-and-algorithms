@@ -164,6 +164,27 @@ class LinkedList:
 
         return True
 
+    def pairwise_swap(self) -> bool:
+        self.curr = self.head
+        if self.curr is None:
+            return False
+        else:
+            if self.curr.next is None:
+                return True
+            else:
+                next_node = self.curr.next
+                while next_node is not None:
+                    temp_data = next_node.data
+                    next_node.data = self.curr.data
+                    self.curr.data = temp_data
+                    if next_node.next is None:
+                        return True
+                    self.curr = next_node.next
+                    if self.curr.next is None:
+                        return True
+                    next_node = self.curr.next
+                return True
+
 
 if __name__ == '__main__':
     l = LinkedList()
@@ -181,5 +202,5 @@ if __name__ == '__main__':
     l.delete_node_by_position(1)
     l.print_linked_list()
 
-    print(l.length_of_linked_list_iterative())
-    print(l.length_of_linked_list_recursive())
+    l.pairwise_swap()
+    l.print_linked_list()

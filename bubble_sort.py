@@ -15,7 +15,7 @@ def bubble_sort(arr):
 print(bubble_sort([2,5,1,3,10]))
 
 
-# Good approach to find second largest element of unsorted array, perform 2 rounds
+# Good approach is to find second largest element of unsorted array, perform 2 rounds
 
 
 # optimization : if no swap found then break
